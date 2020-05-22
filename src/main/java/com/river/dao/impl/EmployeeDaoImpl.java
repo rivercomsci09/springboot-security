@@ -31,8 +31,7 @@ public class EmployeeDaoImpl extends JdbcDaoSupport implements EmployeeDao{
 	}
 	
 	public void insertEmployee(Employee emp) {
-		String sql = "INSERT INTO employee " +
-				"(empId, empName) VALUES (?, ?)" ;
+		String sql = "INSERT INTO employee(empId, empName) VALUES (?, ?)" ;
 		getJdbcTemplate().update(sql, new Object[]{
 				emp.getEmpId(), emp.getEmpName()
 		});
@@ -56,17 +55,19 @@ public class EmployeeDaoImpl extends JdbcDaoSupport implements EmployeeDao{
 	
 	public List<Employee> getAllEmployees(){
 		String sql = "SELECT * FROM employee";
-		List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sql);
 		
-		List<Employee> result = new ArrayList<Employee>();
-		for(Map<String, Object> row:rows){
-			Employee emp = new Employee();
-			emp.setEmpId((String)row.get("empId"));
-			emp.setEmpName((String)row.get("empName"));
-			result.add(emp);
-		}
-		
-		return result;
+		  List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sql);
+		  
+		  List<Employee> result = new ArrayList<Employee>(); 
+		  for(Map<String, Object>row:rows){ 
+			  Employee emp = new Employee();
+			  emp.setEmpId((String)row.get("empId"));
+			  emp.setEmpName((String)row.get("empName")); 
+			  result.add(emp); }
+		  
+		  return result;
+		 
+//		return getJdbcTemplate().query(sql, new EmployeeMapper());
 	}
 
 	public Employee getEmployeeById(String empId) {
@@ -79,5 +80,16 @@ public class EmployeeDaoImpl extends JdbcDaoSupport implements EmployeeDao{
 				return emp;
 			}
 		});
+	}
+}
+
+
+//implement Spring RowMapper.
+class EmployeeMapper implements RowMapper {
+	public Employee mapRow(ResultSet rs, int rowNumber) throws SQLException {
+	    String empId = rs.getString(1);
+	    String empName = rs.getString(2);
+	    Employee emp = new Employee(empId, empName);
+	    return emp;
 	}
 }
