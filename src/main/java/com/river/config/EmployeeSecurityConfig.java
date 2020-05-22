@@ -26,7 +26,7 @@ public class EmployeeSecurityConfig extends WebSecurityConfigurerAdapter{
             .antMatchers("/addNewEmployee").hasAnyRole("ADMIN")
             .anyRequest().authenticated()
             .and()
-            .formLogin().permitAll()
+            .formLogin().loginPage("/login").permitAll()
             .and()
             .logout().permitAll();
 
