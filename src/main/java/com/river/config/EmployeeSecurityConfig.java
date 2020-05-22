@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 @Configuration
@@ -18,10 +19,9 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 public class EmployeeSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
-    }
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 	
 	@Bean
 	public JdbcUserDetailsManager jdbcUserDetailsManager() throws Exception {
@@ -57,7 +57,7 @@ public class EmployeeSecurityConfig extends WebSecurityConfigurerAdapter{
             .and()
             .logout().permitAll();
 
-        http.csrf().disable();
+//        http.csrf().disable();
     }
 
 //    @Autowired
