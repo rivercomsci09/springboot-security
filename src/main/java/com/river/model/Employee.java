@@ -1,41 +1,29 @@
 package com.river.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
 public class Employee {
-	
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Id
-	private long id;
-	private String name;
-	
-	public Employee() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-	public Employee(long id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
+
+	private String empId;
+	private String empName;
+
+	public String getEmpId() {
+		return empId;
 	}
 
-	public long getId() {
-		return id;
+	public void setEmpId(String empId) {
+		this.empId = empId;
 	}
-	public void setId(long id) {
-		this.id = id;
+
+	public String getEmpName() {
+		return empName;
 	}
-	public String getName() {
-		return name;
+
+	public void setEmpName(String empName) {
+		this.empName = empName;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	@Override
+	public String toString() {
+		return "Employee [empId=" + empId + ", empName=" + empName + "]";
 	}
-	
-	
+
 }
