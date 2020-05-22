@@ -35,8 +35,9 @@
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
         </div>
-
     </form>
+
+	<a href="/register">Register New User</a>
 
 </div>
 <!-- /container -->

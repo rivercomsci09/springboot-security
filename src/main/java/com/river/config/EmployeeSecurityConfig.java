@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
@@ -21,6 +22,13 @@ public class EmployeeSecurityConfig extends WebSecurityConfigurerAdapter{
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return bCryptPasswordEncoder;
     }
+	
+	@Bean
+	public JdbcUserDetailsManager jdbcUserDetailsManager() throws Exception {
+		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
+		jdbcUserDetailsManager.setDataSource(dataSource);
+		return jdbcUserDetailsManager;
+	}
 	
 	@Autowired
     DataSource dataSource;
@@ -39,7 +47,7 @@ public class EmployeeSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-        	.antMatchers("/").permitAll()
+        	.antMatchers("/register").permitAll()
         	.antMatchers("/welcome").hasAnyRole("USER", "ADMIN")
         	.antMatchers("/getEmployees").hasAnyRole("USER", "ADMIN")
             .antMatchers("/addNewEmployee").hasAnyRole("ADMIN")

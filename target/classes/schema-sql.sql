@@ -20,8 +20,8 @@ create table authorities (
     foreign key (username) references users (username)
 );
 
-insert into users(username, password, enabled)values('admin','admin',true);
+insert into users(username, password, enabled)values('admin','$2y$12$KCmKEbSF9Jeq8HQAWcSzIu/fgEBe8dEW2CQs1vRLyDDACzD6kQ16O',true);
 insert into authorities(username,authority)values('admin','ROLE_ADMIN');
  
-insert into users(username, password, enabled)values('user','user',true);
+insert into users(username, password, enabled)values('user','$2y$12$0M9iYASCHzHBq3dgEJO.juiJMwPiEI9RtEppdPJGrOZtJ.jJ40fOm',true);
 insert into authorities(username,authority)values('user','ROLE_USER');
