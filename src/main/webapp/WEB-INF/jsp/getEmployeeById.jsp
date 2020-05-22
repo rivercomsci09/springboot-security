@@ -10,14 +10,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>List Employees</h1>
+	<h1>Employees By Id</h1>
 	 <ul>
-        <c:forEach items="${employees}" var="emp">
             <li>
                 <h2>${emp.empId}</h2>
                 <h2>${emp.empName}</h2>
             </li>
-        </c:forEach>
     </ul>
 </body>
 </html>

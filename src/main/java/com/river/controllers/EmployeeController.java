@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.river.model.Employee;
@@ -43,6 +44,14 @@ public class EmployeeController {
 		List<Employee> employees = employeeService.getAllEmployees();
 		ModelAndView model = new ModelAndView("getEmployees");
 		model.addObject("employees", employees);
+		return model;
+	}
+	
+	@RequestMapping(value = {"/getEmployeeById"}, method = RequestMethod.GET)
+	public ModelAndView getEmployeeById(@RequestParam String id) {
+		Employee emp = employeeService.getEmployeeById(id);
+		ModelAndView model = new ModelAndView("getEmployeeById");
+		model.addObject("emp", emp);
 		return model;
 	}
 	

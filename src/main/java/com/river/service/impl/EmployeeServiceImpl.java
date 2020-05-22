@@ -27,8 +27,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return employeeDao.getAllEmployees();
 	}
 
-	public void getEmployeeById(String empId) {
+	public Employee getEmployeeById(String empId) {
 		Employee employee = employeeDao.getEmployeeById(empId);
 		System.out.println(employee);
+		return employee;
 	}
 }

@@ -72,14 +72,15 @@ public class EmployeeDaoImpl extends JdbcDaoSupport implements EmployeeDao{
 
 	public Employee getEmployeeById(String empId) {
 		String sql = "SELECT * FROM employee WHERE empId = ?";
-		return (Employee)getJdbcTemplate().queryForObject(sql, new Object[]{empId}, new RowMapper<Employee>(){
-			public Employee mapRow(ResultSet rs, int rwNumber) throws SQLException {
-				Employee emp = new Employee();
-				emp.setEmpId(rs.getString("empId"));
-				emp.setEmpName(rs.getString("empName"));
-				return emp;
-			}
-		});
+//		return (Employee)getJdbcTemplate().queryForObject(sql, new Object[]{empId}, new RowMapper<Employee>(){
+//			public Employee mapRow(ResultSet rs, int rwNumber) throws SQLException {
+//				Employee emp = new Employee();
+//				emp.setEmpId(rs.getString("empId"));
+//				emp.setEmpName(rs.getString("empName"));
+//				return emp;
+//			}
+//		});
+		return getJdbcTemplate().queryForObject(sql, new Object[]{empId}, new EmployeeMapper());
 	}
 }
 
