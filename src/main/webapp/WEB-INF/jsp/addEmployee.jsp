@@ -1,6 +1,6 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<sec:csrfInput /> 
+ 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -22,6 +22,7 @@
 				<form:input path="empName" />
 			</p>
 			<input type="SUBMIT" value="Submit" />
+			<sec:csrfInput />
 		</form:form>
 	</div>
 </body>

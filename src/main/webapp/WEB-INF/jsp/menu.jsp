@@ -1,7 +1,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 
 <div style="border: 1px solid #ccc; padding: 5px; margin-bottom: 20px;">
-
     <a href="/welcome">Home</a> |  
     <a href="/addNewEmployee">Add Employee</a> |
     <a href="/getEmployees">Show Employees</a> |
@@ -12,9 +13,7 @@
             
 		</h2>
 	</u>
-
     <form id="logoutForm" method="POST" action="/logout">
+    	 <sec:csrfInput />
     </form>
-
-
 </div>
