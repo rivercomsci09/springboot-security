@@ -14,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
+import com.river.handler.EmployeeAuthenticationSuccessHandler;
+
 @Configuration
 @EnableWebSecurity
 public class EmployeeSecurityConfig extends WebSecurityConfigurerAdapter{
@@ -32,6 +34,9 @@ public class EmployeeSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
     DataSource dataSource;
+	
+	@Autowired
+	private EmployeeAuthenticationSuccessHandler successHandler;
 
 	//Enable jdbc authentication
     @Autowired
@@ -51,9 +56,10 @@ public class EmployeeSecurityConfig extends WebSecurityConfigurerAdapter{
         	.antMatchers("/welcome").hasAnyRole("USER", "ADMIN")
         	.antMatchers("/getEmployees").hasAnyRole("USER", "ADMIN")
             .antMatchers("/addNewEmployee").hasAnyRole("ADMIN")
+            .antMatchers("/getEmployeeById").hasAnyRole("USER")
             .anyRequest().authenticated()
             .and()
-            .formLogin().loginPage("/login").permitAll()
+            .formLogin().successHandler(successHandler).loginPage("/login").permitAll()
             .and()
             .logout().permitAll();
 
